@@ -1,12 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { Helmet, HelmetProvider } from "react-helmet-async";
 import { RecoilRoot } from "recoil";
 import { createGlobalStyle, ThemeProvider } from "styled-components";
 import App from "./App";
 import { theme } from "./theme";
 
 const GlobalStyle = createGlobalStyle`
-  @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
   html, body, div, span, applet, object, iframe,
   h1, h2, h3, h4, h5, h6, p, blockquote, pre,
   a, abbr, acronym, address, big, cite, code,
@@ -59,10 +59,25 @@ const GlobalStyle = createGlobalStyle`
 ReactDOM.render(
   <React.StrictMode>
     <RecoilRoot>
-      <ThemeProvider theme={theme}>
-        <GlobalStyle />
-        <App />
-      </ThemeProvider>
+      <HelmetProvider>
+        <ThemeProvider theme={theme}>
+          <GlobalStyle />
+          <Helmet>
+            <title>KANBAN</title>
+            <link rel="preconnect" href="https://fonts.googleapis.com" />
+            <link
+              rel="preconnect"
+              href="https://fonts.gstatic.com"
+              crossOrigin="true"
+            />
+            <link
+              href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
+              rel="stylesheet"
+            />
+          </Helmet>
+          <App />
+        </ThemeProvider>
+      </HelmetProvider>
     </RecoilRoot>
   </React.StrictMode>,
   document.getElementById("root")
